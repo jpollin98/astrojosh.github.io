@@ -7,7 +7,7 @@
 		<meta name="description" content="Joshua Pollin is an astrophysics graduate student at Queen's University Belfast specialising in Type Ia supernovae research and Monte Carlo radiative transfer calculations." />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<style>
-			/* Navigation bar styles - UPDATED */
+			/* Mobile-friendly navigation bar styles */
 			.navbar {
 				position: sticky;
 				top: 0;
@@ -16,20 +16,23 @@
 				overflow: hidden;
 				z-index: 1000;
 				box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-				/* Remove any potential border causing the dotted line */
 				border: none;
-				border-bottom: none;
-				/* Center the navigation links */
-				text-align: center;
 			}
-			
-			/* Center the navigation links */
+
 			.navbar-container {
 				display: flex;
-				justify-content: center;
+				justify-content: space-between;
+				align-items: center;
+				padding: 0 20px;
 				width: 100%;
 			}
-			
+
+			.nav-links {
+				display: flex;
+				justify-content: center;
+				flex-grow: 1;
+			}
+
 			.navbar a {
 				display: inline-block;
 				color: white;
@@ -38,29 +41,75 @@
 				text-decoration: none;
 				font-size: 14px;
 				transition: background-color 0.3s;
-				/* Remove any potential borders */
 				border: none;
 				outline: none;
 			}
-			
+
 			.navbar a:hover {
 				background-color: #555;
 			}
-			
+
 			.navbar a.active {
 				background-color: #4CAF50;
 			}
-			
-			/* Responsive navigation */
-			@media screen and (max-width: 600px) {
-				.navbar-container {
+
+			/* Hamburger menu */
+			.menu-toggle {
+				display: none;
+				cursor: pointer;
+				padding: 14px 0;
+			}
+
+			.bar {
+				display: block;
+				width: 25px;
+				height: 3px;
+				margin: 5px auto;
+				background-color: white;
+				transition: all 0.3s ease-in-out;
+			}
+
+			/* Responsive navigation for mobile */
+			@media screen and (max-width: 768px) {
+				.menu-toggle {
+					display: block;
+				}
+				
+				.nav-links {
+					position: absolute;
+					top: 100%;
+					left: 0;
+					right: 0;
 					flex-direction: column;
+					background-color: #333;
+					max-height: 0;
+					overflow: hidden;
+					transition: max-height 0.5s ease;
+				}
+				
+				.nav-links.active {
+					max-height: 500px;
+					box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 				}
 				
 				.navbar a {
 					display: block;
-					text-align: center;
 					width: 100%;
+					text-align: left;
+					padding: 14px 20px;
+				}
+				
+				/* Hamburger to X animation */
+				.menu-toggle.active .bar:nth-child(1) {
+					transform: translateY(8px) rotate(45deg);
+				}
+				
+				.menu-toggle.active .bar:nth-child(2) {
+					opacity: 0;
+				}
+				
+				.menu-toggle.active .bar:nth-child(3) {
+					transform: translateY(-8px) rotate(-45deg);
 				}
 			}
 			
@@ -331,15 +380,22 @@
 		<!-- Navigation Bar - UPDATED -->
 		<div class="navbar" id="myNavbar">
 			<div class="navbar-container">
-				<a href="#header">Home</a>
-				<a href="#one">About Me</a>
-				<a href="#skills">Skills</a>
-				<a href="#projects">Research</a>
-				<a href="#two">Publications</a>
-				<a href="#impact">Impact</a>
-				<a href="#outreach">Public Talks</a>
-				<a href="#three">Contact</a>
-				<a href="#pictures">Pictures</a>
+				<div class="menu-toggle" id="menuToggle">
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</div>
+				<div class="nav-links" id="navLinks">
+					<a href="#header">Home</a>
+					<a href="#one">About Me</a>
+					<a href="#skills">Skills</a>
+					<a href="#projects">Research</a>
+					<a href="#two">Publications</a>
+					<a href="#impact">Impact</a>
+					<a href="#outreach">Public Talks</a>
+					<a href="#three">Contact</a>
+					<a href="#pictures">Pictures</a>
+				</div>
 			</div>
 		</div>
 
@@ -486,7 +542,7 @@
 						</li>
 						<li>
 							<h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
-							<a href="mailto:jpollin@qub.ac.uk">jpollin@qub.ac.uk</a>
+							<a href="mailto:jpollin@qub.ac.uk">jpollin02@qub.ac.uk</a>
 						</li>
 					</ul>
 				</div>
@@ -636,6 +692,34 @@
 				
 				// Initialize gallery
 				initGallery();
+				const menuToggle = document.getElementById('menuToggle');
+				const navLinks = document.getElementById('navLinks');
+				
+				if (menuToggle) {
+					menuToggle.addEventListener('click', function() {
+						menuToggle.classList.toggle('active');
+						navLinks.classList.toggle('active');
+					});
+				}
+				
+				// Close mobile menu when a link is clicked
+				const navItems = document.querySelectorAll('.nav-links a');
+				navItems.forEach(item => {
+					item.addEventListener('click', function() {
+						if (window.innerWidth <= 768) {
+							menuToggle.classList.remove('active');
+							navLinks.classList.remove('active');
+						}
+					});
+				});
+				    // Close mobile menu when clicking outside
+					document.addEventListener('click', function(e) {
+						const isNavbarOrToggle = e.target.closest('.navbar-container');
+						if (!isNavbarOrToggle && navLinks.classList.contains('active')) {
+							menuToggle.classList.remove('active');
+							navLinks.classList.remove('active');
+						}
+					});
 			});
 			
 			// Gallery functionality
