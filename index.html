@@ -4,213 +4,689 @@
 		<title>Joshua Pollin | Astrophysics Graduate Student | Type Ia Supernovae Specialist</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<meta name="description" content="Joshua Pollin is an astrophysics graduate student at Queen's University Belfast specializing in Type Ia supernovae research and Monte Carlo radiative transfer calculations." />
+		<meta name="description" content="Joshua Pollin is an astrophysics graduate student at Queen's University Belfast specialising in Type Ia supernovae research and Monte Carlo radiative transfer calculations." />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			/* Navigation bar styles - UPDATED */
+			.navbar {
+				position: sticky;
+				top: 0;
+				width: 100%;
+				background-color: #333;
+				overflow: hidden;
+				z-index: 1000;
+				box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+				/* Remove any potential border causing the dotted line */
+				border: none;
+				border-bottom: none;
+				/* Center the navigation links */
+				text-align: center;
+			}
+			
+			/* Center the navigation links */
+			.navbar-container {
+				display: flex;
+				justify-content: center;
+				width: 100%;
+			}
+			
+			.navbar a {
+				display: inline-block;
+				color: white;
+				text-align: center;
+				padding: 14px 16px;
+				text-decoration: none;
+				font-size: 14px;
+				transition: background-color 0.3s;
+				/* Remove any potential borders */
+				border: none;
+				outline: none;
+			}
+			
+			.navbar a:hover {
+				background-color: #555;
+			}
+			
+			.navbar a.active {
+				background-color: #4CAF50;
+			}
+			
+			/* Responsive navigation */
+			@media screen and (max-width: 600px) {
+				.navbar-container {
+					flex-direction: column;
+				}
+				
+				.navbar a {
+					display: block;
+					text-align: center;
+					width: 100%;
+				}
+			}
+			
+			/* Fix any potential outline or border on the body or header elements */
+			body, #header, .navbar, #main, section {
+				outline: none;
+				border-top: none;
+				border-bottom: none;
+			}
+			
+			/* Collapsible header styles - IMPROVED */
+			.collapsible {
+				background-color: #f5f5f5;
+				color: #444;
+				cursor: pointer;
+				padding: 18px;
+				width: 100%;
+				border: none;
+				text-align: left;
+				outline: none;
+				font-size: 15px;
+				transition: 0.4s;
+				margin-bottom: 10px;
+				border-radius: 5px;
+				font-weight: bold;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.active, .collapsible:hover {
+				background-color: #e0e0e0;
+			}
+
+			.collapsible:after {
+				content: '\2212';
+				color: #777;
+				font-weight: bold;
+				margin-left: 5px;
+				transition: 0.2s;
+			}
+
+			.collapsible.collapsed:after {
+				content: '\002B';
+				transform: rotate(0deg);
+			}
+
+			.content {
+				background-color: white;
+				overflow: hidden;
+				transition: max-height 0.4s ease-out, padding 0.3s ease;
+				max-height: 2000px; /* Starting with large max-height */
+				padding: 20px;
+				border-radius: 0 0 5px 5px;
+				margin-bottom: 30px;
+			}
+
+			.content.collapsed {
+				max-height: 0;
+				padding-top: 0;
+				padding-bottom: 0;
+				margin-bottom: 0;
+				opacity: 0.8;
+			}
+			
+			/* Video container styling */
+			.video-container {
+				position: relative;
+				padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+				height: 0;
+				margin-bottom: 30px;
+			}
+			
+			.video-container iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+
+			/* Add this to your existing CSS */
+			.icon img.bluesky-logo {
+				filter: grayscale(100%); /* Convert the logo to grayscale */
+				transition: filter 0.3s ease; /* Smooth transition for hover effect */
+			}
+
+			.icon img.bluesky-logo:hover {
+				filter: grayscale(0%); /* Revert to full color on hover */
+			}
+			
+			.icon a[href*="github.com"]:hover {
+				color: #000000; /* GitHub black */
+			}
+
+			/* ORCID */
+			.icon a[href*="orcid.org"]:hover {
+				color: #A6CE39; /* ORCID green */
+			}
+
+			/* Instagram */
+			.icon a[href*="instagram.com"]:hover {
+				color: #E1306C; /* Instagram pink */
+			}
+
+			/* Email */
+			.icon a[href^="mailto:"]:hover {
+				color: #D44638; /* Gmail red */
+			}
+
+			.avatar img {
+				width: 200px; /* Set the desired width */
+				height: 200px; /* Set the desired height */
+				object-fit: cover; /* Ensures the image scales proportionally */
+				border-radius: 50%; /* Optional: Keeps the image circular if it's a profile picture */
+			}
+			
+			
+			.icon a {
+				color: inherit; /* Inherit the default color */
+				transition: color 0.3s ease; /* Smooth transition for hover effect */
+			}
+
+			.icon a:hover {
+				color: #1DA1F2; /* Twitter blue color for consistency */
+			}
+
+			/* Specific styles for the Bluesky logo */
+			.icon img.bluesky-logo {
+				filter: grayscale(100%); /* Convert the logo to grayscale */
+				transition: filter 0.3s ease, opacity 0.3s ease; /* Smooth transition for hover effect */
+			}
+
+			.icon img.bluesky-logo:hover {
+				filter: grayscale(0%); /* Revert to full color on hover */
+				opacity: 1; /* Ensure full visibility */
+			}
+			
+			/* Standardized science plots - FIXED */
+			.work-item .image.fit.thumb {
+				position: relative;
+				width: 100%;
+				height: 0;
+				padding-bottom: 75%; /* Maintain 4:3 aspect ratio */
+				overflow: hidden;
+				margin-bottom: 1em;
+			}
+			
+			.work-item .image.fit.thumb img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover; /* Cover the container while maintaining aspect ratio */
+			}
+			
+			/* Fix for specific science plot images */
+			.work-item .image.fit.thumb img[src*="Presentation1.gif"] {
+				object-fit: contain; /* Changed from cover to maintain aspect ratio */
+				height: auto;
+				min-height: 100%;
+			}
+
+			.work-item .image.fit.thumb img[src*="multid_nebular.png"],
+			.work-item .image.fit.thumb img[src*="Photospheric.png"] {
+				object-fit: contain; /* Changed from cover to maintain aspect ratio */
+				width: auto;
+				min-width: 100%;
+			}
+			
+			/* Image gallery styles */
+			.gallery-container {
+				position: relative;
+				width: 100%;
+				height: 0;
+				padding-bottom: 56.25%; /* 16:9 aspect ratio */
+				margin-bottom: 30px;
+				overflow: hidden;
+				border-radius: 5px;
+				box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+			}
+			
+			.gallery-slide {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+				transition: opacity 1s ease-in-out;
+				display: none;
+			}
+			
+			.gallery-slide.active {
+				opacity: 1;
+				display: block;
+			}
+			
+			.gallery-slide img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+			
+			.gallery-caption {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				background-color: rgba(0,0,0,0.7);
+				color: white;
+				padding: 10px;
+				text-align: center;
+			}
+			
+			.gallery-nav {
+				text-align: center;
+				margin-top: 10px;
+			}
+			
+			.gallery-nav button {
+				background-color: #333;
+				color: white;
+				border: none;
+				padding: 8px 16px;
+				margin: 0 5px;
+				border-radius: 4px;
+				cursor: pointer;
+				transition: background-color 0.3s;
+			}
+			
+			.gallery-nav button:hover {
+				background-color: #555;
+			}
+			
+			.gallery-dots {
+				text-align: center;
+				margin-top: 10px;
+			}
+			
+			.gallery-dot {
+				display: inline-block;
+				width: 12px;
+				height: 12px;
+				background-color: #bbb;
+				border-radius: 50%;
+				margin: 0 5px;
+				cursor: pointer;
+				transition: background-color 0.3s;
+			}
+			
+			.gallery-dot.active {
+				background-color: #333;
+			}
+			
+			/* AI acknowledgment styling */
+			.ai-acknowledgment {
+				font-size: 0.7em;
+				color: #888;
+				margin-top: 10px;
+				text-align: center;
+				font-style: italic;
+			}
+		</style>
 	</head>
 	<body class="is-preload">
+		<!-- Navigation Bar - UPDATED -->
+		<div class="navbar" id="myNavbar">
+			<div class="navbar-container">
+				<a href="#header">Home</a>
+				<a href="#one">About Me</a>
+				<a href="#skills">Skills</a>
+				<a href="#projects">Research</a>
+				<a href="#two">Publications</a>
+				<a href="#impact">Impact</a>
+				<a href="#outreach">Public Talks</a>
+				<a href="#three">Contact</a>
+				<a href="#pictures">Pictures</a>
+			</div>
+		</div>
 
 		<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<a href="#" class="avatar"><img src="images/avatar.jpg" alt="Joshua Pollin" /></a>
-					<h1><strong>Hi there! I'm Joshua Pollin</strong></h1>
-					<p>Graduate Student in Astrophysics<br />
-					Queen's University Belfast</p>
-				</div>
-			</header>
+		<header id="header">
+			<div class="inner">
+				<a href="#" class="avatar"><img src="images/avatar.png" alt="Joshua Pollin" /></a>
+				<h1><strong>Hello there! I'm Josh Pollin</strong></h1>
+				<p>Graduate Student in Astrophysics<br />
+				Queen's University Belfast</p>
+			</div>
+		</header>
 
 		<!-- Main -->
-			<div id="main">
+		<div id="main">
 
-				<!-- About Me -->
-					<section id="one">
-						<header class="major">
-							<h2>About Me</h2>
-						</header>
-						<p>I'm a passionate astrophysicist specializing in Type Ia supernovae research at Queen's University Belfast. My work focuses on developing and applying Monte Carlo radiative transfer calculations to interpret spectra and light curves of supernovae using the 3D, time-dependent radiative transfer code ARTIS.</p>
-						
-						<p>My research contributes to our understanding of the progenitor systems and explosion mechanisms of Type Ia supernovae. I'm particularly interested in double-degenerate double-detonation scenarios and how different configurations of helium shells and white dwarf masses affect observable characteristics.</p>
-						
-						<p>I actively collaborate with researchers at the Heidelberg Institute for Theoretical Studies and Max Planck Institute for Astrophysics, and have extensive experience with high-performance computing facilities in the UK and Germany.</p>
-						
-						<ul class="actions">
-							<li><a href="#" class="button">My CV</a></li>
-						</ul>
-					</section>
-
-				<!-- Skills -->
-					<section id="skills">
-						<h2>Skills & Expertise</h2>
-						<div class="row">
-							<div class="col-6 col-12-xsmall">
-								<h3>Technical Skills</h3>
-								<ul>
-									<li><strong>Programming:</strong> C++, Python (NumPy, Matplotlib, pandas), Bash, C</li>
-									<li><strong>Software Development:</strong> GitHub, version control, continuous integration</li>
-									<li><strong>High-Performance Computing:</strong> Experience with multiple HPC facilities, utilizing ~7 million CPU hours annually</li>
-									<li><strong>Data Analysis:</strong> Handling photometric, spectroscopic, and polarimetric data</li>
-								</ul>
-							</div>
-							<div class="col-6 col-12-xsmall">
-								<h3>Research Skills</h3>
-								<ul>
-									<li><strong>Theoretical Modeling:</strong> 3D radiative transfer simulations using ARTIS</li>
-									<li><strong>Parameter Space Exploration:</strong> Using TARDIS for hydrodynamic explosion models</li>
-									<li><strong>Scientific Communication:</strong> Conference presentations, academic writing, technical reports</li>
-									<li><strong>Collaboration:</strong> Active participant in international research partnerships</li>
-								</ul>
-							</div>
-						</div>
-					</section>
-
-				<!-- Current Projects -->
-					<section id="projects">
-						<h2>Current Research Projects</h2>
-						<div class="row">
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/thumbs/01.jpg" alt="Nebular phase simulation" /></a>
-								<h3>Multidimensional Nebular Phase Radiative Transfer Calculations</h3>
-								<p>Investigating how multidimensional explosion models can be used to understand the diversity of Type Ia supernovae nebular spectra, with a primary focus on dynamical mergers of white dwarfs from Pakmor (2022).</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/02.jpg" class="image fit thumb"><img src="images/thumbs/02.jpg" alt="Parameter space visualization" /></a>
-								<h3>Parameter Space Investigation of Dynamical Merger Models</h3>
-								<p>Building on findings from my first publication to explore how different helium shell and mass configurations impact the observable characteristics of explosion models.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/03.jpg" class="image fit thumb"><img src="images/thumbs/03.jpg" alt="Polarization data" /></a>
-								<h3>Polarisation Signals Of Dynamical Mergers</h3>
-								<p>Investigating the polarisation of dynamical merger models to determine how asymmetries compare to observational constraints, aiming to support or rule out progenitor pathways.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/04.jpg" class="image fit thumb"><img src="images/thumbs/04.jpg" alt="Code comparison" /></a>
-								<h3>ARTIS Code Comparison</h3>
-								<p>Co-leading an internal investigation comparing ARTIS and CMFGEN radiative transfer codes, following on from Blondin (2022).</p>
-							</article>
-						</div>
-					</section>
-
-				<!-- Publications -->
-					<section id="two">
-						<h2>Publications</h2>
-						
-						<h3>First Author</h3>
-						<div class="row">
-							<div class="col-12">
-								<ul>
-									<li><strong>J. M. Pollin</strong>, S. A. Sim, R. Pakmor et al., "On the fate of the secondary white dwarf in double-degenerate double-detonation Type Ia supernovae - II. 3D synthetic observables," 2024, MNRAS</li>
-									<li><strong>J. M. Pollin</strong>, S. A. Sim, R. Pakmor et al., "On the fate of the secondary white dwarf in double-degenerate double-detonation Type Ia supernovae - III. 3D Nebular Phase synthetic observables" (In preparation)</li>
-								</ul>
-							</div>
-						</div>
-						
-						<h3>Co-authored</h3>
-						<div class="row">
-							<div class="col-12">
-								<ul>
-									<li>F. P Callan et al., Incl <strong>J. M. Pollin</strong>, "Exploring the multidimensional effect and impact of helium in the spectra of double-detonation models for Type Ia supernovae," 2024 (In preparation)<br>
-									<small><em>I provided significant technical support for memory optimization and contributed to discussions about the implications of surface helium in the context of 2D NLTE double-detonation calculations.</em></small></li>
-									
-									<li>F. P Callan et al., Incl <strong>J. M. Pollin</strong>, "Exploring the range of impacts of helium in the spectra of double detonation models for Type Ia supernovae," 2024 (In review)<br>
-									<small><em>Provided both scientific and technical expertise regarding the impact of surface helium in isolated 1D White Dwarf double-detonation NLTE simulations.</em></small></li>
-									
-									<li>S. Srivastav et al., Incl <strong>J. M. Pollin</strong>, "Unprecedented Early Flux Excess in the Hybrid 02es-like Type Ia Supernova 2022ywc Indicates Interaction with Circumstellar Material," 2023, ApJ Letters, 956, L34<br>
-									<small><em>I contributed to discussions around the possible physical processes driving the early light curve excess and compared observations to theoretical explosion models.</em></small></li>
-								</ul>
-							</div>
-						</div>
-						
-						<ul class="actions">
-							<li><a href="#" class="button">Complete Publication List</a></li>
-						</ul>
-					</section>
-
-				<!-- Research Impact -->
-					<section id="impact">
-						<h2>Research Impact</h2>
-						<p>My work on Type Ia supernovae contributes to our understanding of stellar evolution and nucleosynthesis, with implications for galactic chemical enrichment and cosmology. Key accomplishments include:</p>
-						
-						<div class="row">
-							<div class="col-6 col-12-xsmall">
-								<ul>
-									<li>Delivered 5 conference talks in the past 24 months</li>
-									<li>Published 1 first-author paper and contributed to 2 co-authored publications</li>
-									<li>Part of multiple international scientific collaborations</li>
-								</ul>
-							</div>
-							<div class="col-6 col-12-xsmall">
-								<ul>
-									<li>Conducted parameter space investigations of explosion models</li>
-									<li>Explored polarization signals as constraints on progenitor systems</li>
-									<li>Contributed to code comparison efforts to enhance simulation accuracy</li>
-								</ul>
-							</div>
-						</div>
-					</section>
-
-				<!-- Contact -->
-					<section id="three">
-						<h2>Get In Touch</h2>
-						<p>I'm always interested in research collaborations, particularly in the areas of supernova modeling, radiative transfer, or high-performance computing applications in astrophysics. Feel free to reach out using the contact form below or through my professional channels.</p>
-						<div class="row">
-							<div class="col-8 col-12-small">
-								<form method="post" action="#">
-									<div class="row gtr-uniform gtr-50">
-										<div class="col-6 col-12-xsmall"><input type="text" name="name" id="name" placeholder="Name" /></div>
-										<div class="col-6 col-12-xsmall"><input type="email" name="email" id="email" placeholder="Email" /></div>
-										<div class="col-12"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
-									</div>
-									<ul class="actions" style="margin-top: 1em;">
-										<li><input type="submit" value="Send Message" /></li>
-									</ul>
-								</form>
-							</div>
-							<div class="col-4 col-12-small">
-								<ul class="labeled-icons">
-									<li>
-										<h3 class="icon solid fa-home"><span class="label">Address</span></h3>
-										Astrophysics Research Centre<br />
-										Queen's University Belfast<br />
-										Belfast BT7 1NN, UK
-									</li>
-									<li>
-										<h3 class="icon solid fa-mobile-alt"><span class="label">Phone</span></h3>
-										+44 (0) 28 9097 XXXX
-									</li>
-									<li>
-										<h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
-										<a href="mailto:jpollin@qub.ac.uk">jpollin@qub.ac.uk</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</section>
-
-			</div>
-
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<ul class="icons">
-						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon brands fa-orcid"><span class="label">ORCID</span></a></li>
-						<li><a href="#" class="icon brands fa-researchgate"><span class="label">ResearchGate</span></a></li>
-						<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-					</ul>
-					<ul class="copyright">
-						<li>&copy; Joshua Pollin 2025</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			<!-- About Me -->
+			<section id="one">
+				<button class="collapsible">About Me</button>
+				<div class="content">
+					<p>I'm a passionate astrophysicist who specialises in Type Ia supernovae research at Queen's University Belfast. My work focuses on developing and performing Monte Carlo radiative transfer calculations to interpret spectra and light curves of supernovae.</p>
+					
+					<p>My research contributes to our understanding of the progenitor systems of explosive transients. I'm particularly interested in double-degenerate double-detonation scenarios and how different configurations of helium shells and white dwarf masses change observable characteristics.</p>										
+					
+					<ul class="actions">
+						<li><a href="documents/Joshua_Pollin_CV.pdf" class="button" target="_blank">My CV</a></li>
 					</ul>
 				</div>
-			</footer>
+			</section>
+
+			<!-- Skills -->
+			<section id="skills">
+				<button class="collapsible">Skills & Expertise</button>
+				<div class="content">
+					<div class="row">
+						<div class="col-6 col-12-xsmall">
+							<h3>Research Skills</h3>
+							<ul>
+								<li><strong>Theoretical Modelling:</strong> 3D radiative transfer simulations using ARTIS</li>
+								<li><strong>Parameter Space Exploration:</strong> Using the rapid spectral synthesis code TARDIS</li>
+								<li><strong>Scientific Communication:</strong> Conference presentations, academic and technical writing</li>
+								<li><strong>Collaboration:</strong> Active participant in international research partnerships</li>
+							</ul>
+						</div>
+						<div class="col-6 col-12-xsmall">
+							<h3>Technical Skills</h3>
+							<ul>
+								<li><strong>Programming:</strong> C++, Python (NumPy, Matplotlib, pandas), Bash, C</li>
+								<li><strong>Software Development:</strong> GitHub, version control, continuous integration</li>
+								<li><strong>High-Performance Computing:</strong> Experience with multiple international HPC facilities</li>
+								<li><strong>Data Analysis:</strong> Handling photometric, spectroscopic, and polarimetric data</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Current Projects -->
+			<section id="projects">
+				<button class="collapsible">Current Research Projects</button>
+				<div class="content">
+					<div class="row">
+						<article class="col-6 col-14-xsmall work-item">
+							<a href="images/science_plots/multid_nebular.png" class="image fit thumb"><img src="images/science_plots/multid_nebular.png" alt="Nebular phase simulation" /></a>							
+							<h3>Nebular Phase Radiative Transfer Calculations</h3>
+							<p>Investigating the nebular phase of explosion models can be used to understand the progenitors of Type Ia supernovae. This has made been a core aspect of my research to date and has required changes to the detailed microphysics of the radiative transfer code I use.</p>
+						</article>
+						<article class="col-6 col-12-xsmall work-item">
+							<a href="images/science_plots/Photospheric.png" class="image fit thumb"><img src="images/science_plots/Photospheric.png" alt="Photospheric phase simulation" /></a>
+							<h3>Investigation of Dynamical Merger Models</h3>
+							<p>Building on findings from my first publication it is clear that Type Ia supernovae models must explore how different helium shell and mass configurations impact the observable characteristics of the new merger scenarios.</p>
+						</article>
+						<article class="col-6 col-12-xsmall work-item">
+							<a href="images/science_plots/Presentation1.gif" class="image fit thumb"><img src="images/science_plots/Presentation1.gif" alt="Polarization data" /></a>
+							<h3>Polarisation Signals Of Dynamical Mergers</h3>
+							<p>Investigating the polarisation signals of dynamical merger models can be used to determine how asymmetries deep within explosion models compare with that of observational constraints. This project aims to support or rule out potential progenitor pathways.</p>
+						</article>
+						<article class="col-6 col-12-xsmall work-item">
+							<a href="images/science_plots/SiII_velocity_one_explosions_peakcolour.png" class="image fit thumb"><img src="images/science_plots/SiII_velocity_one_explosions_peakcolour.png" alt="Code comparison" /></a>
+							<h3>Si II velocities</h3>
+							<p>I am particularly interested in the Si II velocities produced by different explosion models and how these can be compared to observational constraints. This allows us to determine how the ejecta in explosion models may be structured.</p>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<!-- Publications -->
+			<section id="two">
+				<button class="collapsible">Publications</button>
+				<div class="content">
+					<h3>First Author</h3>
+					<div class="row">
+						<div class="col-12">
+							<ul>
+								<li><strong>J. M. Pollin</strong>, S. A. Sim, R. Pakmor et al., "On the fate of the secondary white dwarf in double-degenerate double-detonation Type Ia supernovae - II. 3D synthetic observables," 2024, MNRAS</li>
+								<li><strong>J. M. Pollin</strong>, S. A. Sim, R. Pakmor et al., "On the fate of the secondary white dwarf in double-degenerate double-detonation Type Ia supernovae - III. 3D Nebular Phase synthetic observables" (In preparation)</li>
+							</ul>
+						</div>
+					</div>															
+					<ul class="actions">
+						<li><a href="https://ui.adsabs.harvard.edu/search/p_=0&q=author%3A%22Pollin%2C%20J.%20M.%22&sort=date%20desc%2C%20bibcode%20desc" class="button">Complete Publication List</a></li>
+					</ul>
+				</div>
+			</section>
+
+			<!-- Research Impact -->
+			<section id="impact">
+				<button class="collapsible">Research Impact</button>
+				<div class="content">
+					<p>My work on Type Ia supernovae contributes to our understanding of stellar evolution and nucleosynthesis, with implications for galaxy evolution and cosmology. Key accomplishments include:</p>
+					
+					<ul>
+						<li>Developed the capability to conduct the first fully 3D NLTE Nebular simulations for Type Ia supernovae.</li>
+						<li>Published the first 3D Photospheric simulations of dynamical mergers.</li>
+						<li>Conducted the first 3D Polarisation calculations, providing new insights for dynamical mergers.</li>					
+					</ul>
+				</div>
+			</section>
+
+			<!-- Public Outreach -->
+			<section id="outreach">
+				<button class="collapsible">Public Talks</button>
+				<div class="content">
+					<h3>Royal Astronomical Society Talk</h3>
+					<p>In this talk, I discuss Type Ia supernovae, their importance for cosmology, and explain my research on understanding their nebular spectra.</p>
+					
+					<div class="video-container">
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/yainoIj-Ugk" title="Joshua Pollin - Royal Astronomical Society Lecture" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</div>
+				</div>
+			</section>
+
+			<!-- Contact -->
+			<section id="three">
+				<button class="collapsible">Get In Touch</button>
+				<div class="content">
+					<p>I'm always interested in research collaborations, particularly in the areas of transient modelling, radiative transfer, or high-performance computing applications in astrophysics. Feel free to reach out through my professional channels.</p>
+					<ul class="labeled-icons">
+						<li>
+							<h3 class="icon solid fa-home"><span class="label">Address</span></h3>
+							Astrophysics Research Centre<br />
+							Queen's University Belfast<br />
+							Belfast BT7 1NN, UK
+						</li>
+						<li>
+							<h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
+							<a href="mailto:jpollin@qub.ac.uk">jpollin@qub.ac.uk</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+			
+			<!-- Pictures Section -->
+			<section id="pictures">
+				<button class="collapsible">Pictures From My Scientific Travels</button>
+				<div class="content">
+					<p>Below are some photographs I've taken during my travels for astrophysics (Just a warning that every other photo will be food...)</p>
+					
+					<div class="gallery-container">						
+						<div class="gallery-slide">
+							<img src="images/travels/german_castle_wurzbergworkshop_trip.jpg" alt="German Castle Würzburg Workshop">
+							<div class="gallery-caption">Exploring Heidelberg Castle during a workshop trip, Germany (2022)</div>
+						</div>
+						<div class="gallery-slide">
+							<img src="images/travels/Kasespatzle.jpg" alt="Käsespätzle">
+							<div class="gallery-caption">Enjoying German Käsespätzle during a visit to Heidelberg, Germany (2024)</div>
+						</div>
+						<div class="gallery-slide">
+							<img src="images/travels/barcelona_presentation.jpg" alt="Barcelona Presentation">
+							<div class="gallery-caption">Giving a presentation at a conference in Barcelona, Spain (2024)</div>
+						</div>
+						<div class="gallery-slide">
+							<img src="images/travels/Japanese_food.jpg" alt="Japanese Food">
+							<div class="gallery-caption">Enjoying some Japanese food during a visit to Dublin, Ireland (2025)</div>
+						</div>
+						<div class="gallery-slide active">
+							<img src="images/travels/visit_to_JET_Fusion_Reactor.jpg" alt="JET Fusion Reactor">
+							<div class="gallery-caption">Visiting the JET Fusion Reactor, Oxfordshire, UK (2023)</div>
+						</div>
+						<div class="gallery-slide">
+							<img src="images/travels/barcelona_pizza.jpg" alt="Barcelona Pizza">
+							<div class="gallery-caption">Having some really good Pizza, Barcelona, Spain (2024)</div>
+						</div>						
+						<div class="gallery-slide">
+							<img src="images/travels/sagradafamila.jpg" alt="Sagrada Família">
+							<div class="gallery-caption">Visiting the Sagrada Família, Barcelona, Spain (2024)</div>
+						</div>						
+					</div>
+					
+					<div class="gallery-nav">
+						<button onclick="prevSlide()">Previous</button>
+						<button onclick="nextSlide()">Next</button>
+					</div>
+					
+					<div class="gallery-dots" id="gallery-dots">
+						<!-- Dots will be added via JavaScript -->
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<!-- Footer -->				
+		<footer id="footer">
+			<div class="inner">
+				<ul class="icons">
+					<li><a href="https://x.com/_astro_joshy" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="https://github.com/jpollin98" class="icon brands fa-github"><span class="label">Github</span></a></li>
+					<li><a href="https://orcid.org/0009-0005-6989-3198" class="icon brands fa-orcid"><span class="label">ORCID</span></a></li>
+					<!-- Bluesky Logo -->
+					<li>
+						<a href="https://bsky.app/profile/astrojoshy.bsky.social" class="icon">
+							<img src="images/bluesky-logo.png" alt="Bluesky" class="bluesky-logo" style="width: 24px; height: 24px;">
+						</a>
+					</li>
+					<li><a href="https://www.instagram.com/joshpollin98/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="mailto:jpollin02@qub.ac.uk" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+				</ul>				
+				<ul class="copyright">
+					<li>&copy; Joshua Pollin 2025</li>
+					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.poptrox.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.poptrox.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		
+		<!-- Collapsible sections script - IMPROVED -->
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				// All sections start expanded by default
+				var coll = document.getElementsByClassName("collapsible");
+				for (var i = 0; i < coll.length; i++) {
+					// Set up click event for each collapsible section
+					coll[i].addEventListener("click", function() {
+						this.classList.toggle("collapsed");
+						var content = this.nextElementSibling;
+						
+						if (this.classList.contains("collapsed")) {
+							content.style.maxHeight = "0";
+							content.classList.add("collapsed");
+						} else {
+							content.classList.remove("collapsed");
+							content.style.maxHeight = "2000px"; // Using a large value that will cover most content
+						}
+					});
+				}
+				
+				// Handle smooth scrolling for navigation links
+				document.querySelectorAll('.navbar a').forEach(anchor => {
+					anchor.addEventListener('click', function(e) {
+						e.preventDefault();
+						
+						const targetId = this.getAttribute('href');
+						const targetElement = document.querySelector(targetId);
+						
+						window.scrollTo({
+							top: targetElement.offsetTop - 60,
+							behavior: 'smooth'
+						});
+						
+						// Update active class
+						document.querySelectorAll('.navbar a').forEach(a => a.classList.remove('active'));
+						this.classList.add('active');
+					});
+				});
+				
+				// Highlight active section on scroll
+				window.addEventListener('scroll', function() {
+					let current = '';
+					const sections = document.querySelectorAll('section, header');
+					const navLinks = document.querySelectorAll('.navbar a');
+					
+					sections.forEach(section => {
+						const sectionTop = section.offsetTop - 100;
+						const sectionHeight = section.clientHeight;
+						if (pageYOffset >= sectionTop) {
+							current = section.getAttribute('id');
+						}
+					});
+					
+					navLinks.forEach(link => {
+						link.classList.remove('active');
+						if (link.getAttribute('href').includes(current)) {
+							link.classList.add('active');
+						}
+					});
+				});
+				
+				// Initialize gallery
+				initGallery();
+			});
+			
+			// Gallery functionality
+			let currentSlide = 0;
+			const slides = document.querySelectorAll('.gallery-slide');
+			
+			function initGallery() {
+				// Create dots for each slide
+				const dotsContainer = document.getElementById('gallery-dots');
+				if (dotsContainer) {
+					for (let i = 0; i < slides.length; i++) {
+						const dot = document.createElement('span');
+						dot.classList.add('gallery-dot');
+						if (i === 0) dot.classList.add('active');
+						dot.onclick = function() { showSlide(i); };
+						dotsContainer.appendChild(dot);
+					}
+				}
+				
+				// Start automatic slideshow
+				setInterval(nextSlide, 5000); // Change slide every 5 seconds
+			}
+			
+			function showSlide(n) {
+				// Hide all slides
+				slides.forEach(slide => {
+					slide.classList.remove('active');
+				});
+				
+				// Update current slide index
+				currentSlide = n;
+				if (currentSlide >= slides.length) currentSlide = 0;
+				if (currentSlide < 0) currentSlide = slides.length - 1;
+				
+				// Show the current slide
+				slides[currentSlide].classList.add('active');
+				
+				// Update dots
+				const dots = document.querySelectorAll('.gallery-dot');
+				dots.forEach((dot, i) => {
+					dot.classList.toggle('active', i === currentSlide);
+				});
+			}
+			
+			function nextSlide() {
+				showSlide(currentSlide + 1);
+			}
+			
+			function prevSlide() {
+				showSlide(currentSlide - 1);
+			}
+		</script>
 	</body>
 </html>
