@@ -1,33 +1,34 @@
-Strata by HTML5 UP
-html5up.net | @ajlkn
-Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+# Personal Website
 
+A personal website built on the foundation of Strata by HTML5 UP, customized to showcase my portfolio, projects, and information.
 
-A simple, minimalist template that actually began life as an unused redesign of my
-personal site. Includes a (configurable) parallax background effect, Poptrox-powered
-lightbox gallery, a bunch of pre-styled elements, and Sass sources for the Sass-inclined.
+## About This Site
 
-Demo images* courtesy of Unsplash, a radtastic collection of CC0 (public domain) images
-you can use for pretty much whatever.
+This website features a clean, minimalist design with a configurable parallax background effect, a Poptrox-powered lightbox gallery, pre-styled elements, and was built using Sass.
 
-(* = Not included)
+## Contact
 
-Feedback, bug reports, and comments are not only welcome, but strongly encouraged :)
+Feel free to reach out through the contact form or via the social media links provided.
 
-AJ
-aj@lkn.io | @ajlkn
+## Acknowledgements
 
-PS: Not sure how to get that contact form working? Give formspree.io a try (it's awesome).
+This website was developed with the following acknowledgements:
 
+### Template:
+- Strata by HTML5 UP (html5up.net | @ajlkn)
+- Used under the CCA 3.0 license (html5up.net/license)
 
-Credits:
+### Images:
+- Demo/placeholder images courtesy of Unsplash (unsplash.com), a collection of CC0 (public domain) images
 
-	Demo Images:
-		Unsplash (unsplash.com)
+### Technologies & Resources:
+- Icons by Font Awesome (fontawesome.io)
+- jQuery (jquery.com)
+- Responsive Tools (github.com/ajlkn/responsive-tools)
+- Contact form powered by Formspree (formspree.io)
 
-	Icons:
-		Font Awesome (fontawesome.io)
+### Development Assistance:
+- Website customization assistance provided by Claude AI (Anthropic)
 
-	Other:
-		jQuery (jquery.com)
-		Responsive Tools (github.com/ajlkn/responsive-tools)
+## Original Template Credits
+Template originally designed by AJ (aj@lkn.io | @ajlkn) of HTML5 UP
