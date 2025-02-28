@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="Joshua Pollin is an astrophysics graduate student at Queen's University Belfast specialising in Type Ia supernovae research and Monte Carlo radiative transfer calculations." />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
 		<style>
 			/* Mobile-friendly navigation bar styles */
 			.navbar {
@@ -394,6 +395,7 @@
 					<a href="#impact">Impact</a>
 					<a href="#outreach">Public Talks</a>
 					<a href="#three">Contact</a>
+					<a href="#map">Places</a>
 					<a href="#pictures">Pictures</a>
 				</div>
 			</div>
@@ -542,11 +544,138 @@
 						</li>
 						<li>
 							<h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
-							<a href="mailto:jpollin@qub.ac.uk">jpollin02@qub.ac.uk</a>
+							<a href="mailto:jpollin02@qub.ac.uk">jpollin02@qub.ac.uk</a>
 						</li>
 					</ul>
 				</div>
 			</section>
+
+			<!-- Map Section -->
+			<section id="map">
+				<button class="collapsible">My Research Map</button>
+				<div class="content">
+					<p>This map shows locations where I've been over the years for astronomy.</p>
+					
+					<div id="research-map" style="width: 100%; height: 400px; margin-bottom: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>
+					
+					<div class="map-legend" style="display: flex; justify-content: center; margin-bottom: 20px;">
+						<div style="margin-right: 20px; display: flex; align-items: center;">
+							<span style="display: inline-block; width: 20px; height: 20px; background-color: #e74c3c; border-radius: 50%; margin-right: 5px;"></span>
+							<span>Talk Locations</span>
+						</div>
+						<div style="display: flex; align-items: center;">
+							<span style="display: inline-block; width: 20px; height: 20px; background-color: #3498db; border-radius: 50%; margin-right: 5px;"></span>
+							<span>Lived</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Add this to your head section -->
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+
+			<!-- Add this before your closing body tag -->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+					// Initialize map after collapsible is expanded to ensure proper rendering
+					const mapCollapsible = document.querySelector('#map .collapsible');
+					const mapContent = document.querySelector('#map .content');
+					let map = null;
+					
+					// Function to initialize the map
+					function initializeMap() {
+						if (map) return; // Don't initialize twice
+						
+						// Create map with initial view centered on Europe
+						map = L.map('research-map').setView([53.0, 4.0], 4);
+						
+						// Add OpenStreetMap tiles
+						L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+							attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+						}).addTo(map);
+						
+						// Custom icons for different types of locations
+						const talkIcon = L.divIcon({
+							className: 'custom-marker',
+							html: '<div style="background-color: #e74c3c; width: 16px; height: 16px; border-radius: 50%; border: 2px solid white;"></div>',
+							iconSize: [20, 20],
+							iconAnchor: [10, 10]
+						});
+						
+						const workIcon = L.divIcon({
+							className: 'custom-marker',
+							html: '<div style="background-color: #3498db; width: 16px; height: 16px; border-radius: 50%; border: 2px solid white;"></div>',
+							iconSize: [20, 20],
+							iconAnchor: [10, 10]
+						});
+						
+						// Initial locations
+						// Talk location
+						L.marker([49.4093, 8.6946], {icon: talkIcon})
+							.addTo(map)
+							.bindPopup('<strong>Heidelberg, Germany</strong><br>Gave a research talk (2022,2023,2024)');    						
+						L.marker([41.3851, 2.1734], {icon: talkIcon})
+							.addTo(map)
+							.bindPopup('<strong>Barcelona, Spain</strong><br>Conference presentation (2024)');
+							
+						L.marker([53.3498, -6.2603], {icon: talkIcon})
+							.addTo(map)
+							.bindPopup('<strong>Dublin, Ireland</strong><br>Research talk (2025)');
+							
+						L.marker([51.5074, -0.1278], {icon: talkIcon})
+							.addTo(map)
+							.bindPopup('<strong>London, UK</strong><br>Research talk (2024)');
+						L.marker([51.7520, -1.2577], {icon: talkIcon})
+							.addTo(map)
+							.bindPopup('<strong>Oxford, UK</strong><br>Research talk (2024)');
+						
+						L.marker([51.4816, -3.1791], {icon: talkIcon})
+							.addTo(map)
+							.bindPopup('<strong>Cardiff, UK</strong><br>Research talk (2023)');					
+							
+						L.marker([56.4620, -2.9707], {icon: talkIcon})
+							.addTo(map)
+							.bindPopup('<strong>Dundee, UK</strong><br>Workshop (2022)');
+							
+						L.marker([54.7767, -1.5761], {icon: talkIcon})
+							.addTo(map)
+							.bindPopup('<strong>Durham, UK</strong><br>Confrence Talk (2025)');
+						
+						// Work/living location
+						L.marker([54.5973, -5.9301], {icon: workIcon})
+							.addTo(map)
+							.bindPopup('<strong>Belfast, Northern Ireland</strong><br>Queen\'s University Belfast');
+						
+						// Fix map rendering issue
+						setTimeout(function() {
+							map.invalidateSize();
+						}, 500);
+					}
+					
+					// Initialize map when section is expanded
+					if (mapCollapsible) {
+						mapCollapsible.addEventListener('click', function() {
+							if (!this.classList.contains('collapsed')) {
+								// Section is being expanded
+								setTimeout(initializeMap, 300); // Delay to ensure container is visible
+							}
+						});
+					}
+					
+					// Initialize map if section is already expanded on page load
+					if (mapContent && !mapContent.classList.contains('collapsed')) {
+						setTimeout(initializeMap, 300);
+					}
+					
+					// Also initialize on window resize to fix rendering issues
+					window.addEventListener('resize', function() {
+						if (map && !mapContent.classList.contains('collapsed')) {
+							map.invalidateSize();
+						}
+					});
+				});
+			</script>
 			
 			<!-- Pictures Section -->
 			<section id="pictures">
@@ -619,6 +748,13 @@
 				</ul>
 			</div>
 		</footer>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+		<script>
+		// The map initialization code I provided goes here
+		document.addEventListener('DOMContentLoaded', function() {
+			// All the map setup code...
+		});
+		</script>
 
 		<!-- Scripts -->
 		<script src="assets/js/jquery.min.js"></script>
